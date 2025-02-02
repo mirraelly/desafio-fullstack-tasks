@@ -10,6 +10,10 @@ export class TaskService {
     return this.prisma.task.findMany();
   }
 
+  async task(id: string): Promise<Task | null> {
+    return this.prisma.task.findFirst({ where: { id } });
+  }
+
   async create(data: Prisma.TaskCreateInput): Promise<void> {
     await this.prisma.task.create({ data });
   }

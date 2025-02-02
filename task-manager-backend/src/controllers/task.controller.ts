@@ -19,6 +19,11 @@ export class TaskController {
     return this.taskService.tasks();
   }
 
+  @Get('task/:id')
+  async getTask(@Param('id') id: string): Promise<Task | null> {
+    return this.taskService.task(id);
+  }
+
   @Post('/task')
   async createTask(@Body() data: Prisma.TaskCreateInput): Promise<void> {
     await this.taskService.create(data);

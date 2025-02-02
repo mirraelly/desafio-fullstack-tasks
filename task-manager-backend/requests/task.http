@@ -1,6 +1,9 @@
 GET http://localhost:3000/task
 
 ###
+GET http://localhost:3000/task/26321a88-3f6c-4cc7-a560-a7f7dbe43b56
+
+###
 POST http://localhost:3000/task
 Content-Type: application/json
 
@@ -19,4 +22,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:3000/task/3c994c62-4e7a-417b-bc97-cdd0e18e0be8
+DELETE  http://localhost:3000/task/26321a88-3f6c-4cc7-a560-a7f7dbe43b56
