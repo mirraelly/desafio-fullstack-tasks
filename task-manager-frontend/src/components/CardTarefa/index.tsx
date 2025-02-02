@@ -11,13 +11,14 @@ export default function CardTarefa({ task }: { task: Task }) {
   );
   const footer = (
     <>
+    <div className="flex flex-wrap justify-start gap-2">
       <Button label="Editar" icon="pi pi-check" severity="info" />
       <Button
         label="Apagar"
         severity="danger"
-        icon="pi pi-times"
-        style={{ marginLeft: "0.5em" }}
+        icon="pi pi-trash text-white"
       />
+      </div>
     </>
   );
 

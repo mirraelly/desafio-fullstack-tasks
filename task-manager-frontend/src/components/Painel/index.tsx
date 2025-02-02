@@ -23,7 +23,7 @@ export default function Painel() {
 
   const gridItem = (task: Task) => {
     return (
-      <div className="col-4 sm:col-4 lg:col-4 xl:col-4" key={task.id}>
+      <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={task.id}>
         <CardTarefa task={task} />
       </div>
     );
@@ -39,7 +39,7 @@ export default function Painel() {
 
   const listTemplate = (tasks: Task[]) => {
     return (
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 p-2">
         {tasks.map((task) => itemTemplate(task))}
       </div>
     );
