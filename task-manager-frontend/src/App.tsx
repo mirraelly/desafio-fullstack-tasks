@@ -1,12 +1,11 @@
 import './App.css'
+import Home from './pages/Home'
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 function App() {
   return (
     <>
-
-      <p className="text-red-400">
-        Teste
-      </p>
+    <Home/>
     </>
   )
 }
