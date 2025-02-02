@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
-import { Task } from '@prisma/client';
+import { Prisma, Task } from '@prisma/client';
 
 @Injectable()
 export class TaskService {
@@ -8,5 +8,9 @@ export class TaskService {
 
   async tasks(): Promise<Task[]> {
     return this.prisma.task.findMany();
+  }
+
+  async create(data: Prisma.TaskCreateInput): Promise<void> {
+    await this.prisma.task.create({ data });
   }
 }
