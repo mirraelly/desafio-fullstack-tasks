@@ -41,6 +41,11 @@ export class TaskController {
     @Param('id') id: string,
     @Body() data: Prisma.TaskUpdateInput,
   ): Promise<void> {
+    const existingTask = await this.taskService.task(id);
+    if (!existingTask) {
+      throw new NotFoundException('Task not found');
+    }
+
     await this.taskService.update({
       where: { id },
       data,
@@ -49,6 +54,10 @@ export class TaskController {
 
   @Delete('/task/:id')
   async delete(@Param('id') id: string): Promise<void> {
+    const existingTask = await this.taskService.task(id);
+    if (!existingTask) {
+      throw new NotFoundException('Task not found');
+    }
     await this.taskService.delete({ id });
   }
 }
