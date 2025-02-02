@@ -13,4 +13,8 @@ export class TaskService {
   async create(data: Prisma.TaskCreateInput): Promise<void> {
     await this.prisma.task.create({ data });
   }
+
+  async delete(where: Prisma.TaskWhereUniqueInput): Promise<void> {
+    await this.prisma.task.delete({ where });
+  }
 }

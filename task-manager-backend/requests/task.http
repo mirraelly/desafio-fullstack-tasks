@@ -8,3 +8,8 @@ Content-Type: application/json
   "title": "Tarefa 1",
   "description": "To do"
 }
+
+### 
+
+
+DELETE  http://localhost:3000/task/3c994c62-4e7a-417b-bc97-cdd0e18e0be8
