@@ -14,6 +14,17 @@ export class TaskService {
     await this.prisma.task.create({ data });
   }
 
+  async update(params: {
+    where: Prisma.TaskWhereUniqueInput;
+    data: Prisma.TaskUpdateInput;
+  }): Promise<Task> {
+    const { data, where } = params;
+    return this.prisma.task.update({
+      data,
+      where,
+    });
+  }
+
   async delete(where: Prisma.TaskWhereUniqueInput): Promise<void> {
     await this.prisma.task.delete({ where });
   }
