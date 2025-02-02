@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -21,7 +22,13 @@ export class TaskController {
 
   @Get('task/:id')
   async getTask(@Param('id') id: string): Promise<Task | null> {
-    return this.taskService.task(id);
+    const task = await this.taskService.task(id);
+
+    if (!task) {
+      throw new NotFoundException('Task not found');
+    }
+
+    return task;
   }
 
   @Post('/task')

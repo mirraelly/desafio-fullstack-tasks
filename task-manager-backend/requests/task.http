@@ -8,12 +8,12 @@ POST http://localhost:3000/task
 Content-Type: application/json
 
 {
-  "title": "Tarefa 1",
+  "title": "Tarefa 2",
   "description": "To do"
 }
 
 ### 
-PUT  http://localhost:3000/task/26321a88-3f6c-4cc7-a560-a7f7dbe43b56
+PUT  http://localhost:3000/task/d9287dac-6ab2-4ed5-8954-2bf1e9bc334d
 Content-Type: application/json
 
 {
@@ -22,4 +22,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:3000/task/26321a88-3f6c-4cc7-a560-a7f7dbe43b56
+DELETE  http://localhost:3000/task/d9287dac-6ab2-4ed5-8954-2bf1e9bc334d
