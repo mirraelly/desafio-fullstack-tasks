@@ -6,6 +6,10 @@ body {
     background-color: #4d4d83 !important;
 }
 
+.p-dataview .p-dataview-content {
+    background-color: transparent;
+}
+
 .custom-menubar .p-menuitem-link,
 .custom-menubar .p-menuitem-text,
 .custom-menubar .pi ,

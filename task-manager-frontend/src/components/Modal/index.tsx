@@ -14,9 +14,9 @@ interface ModalProps {
 
 export default function Modal({ open, onClose, task }: ModalProps) {
   const {
-    register, 
-    handleSubmit, 
-    formState: { errors }, 
+    register,
+    handleSubmit,
+    formState: { errors },
     reset,
   } = useForm<Task>();
 
@@ -26,7 +26,7 @@ export default function Modal({ open, onClose, task }: ModalProps) {
     }
   }, [task, reset]);
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: Task) => {
     console.log("Dados do formulário enviados:", data);
   };
 
@@ -43,7 +43,7 @@ export default function Modal({ open, onClose, task }: ModalProps) {
         icon="pi pi-check"
         onClick={() => onClose()}
         autoFocus
-         type="submit"
+        type="submit"
       />
     </div>
   );
@@ -69,9 +69,10 @@ export default function Modal({ open, onClose, task }: ModalProps) {
                 {...register("title", { required: "Título é obrigatório" })}
                 placeholder="Título"
                 className="p-invalid mr-2"
-             
               />
-              <Message severity="error" text="Username is required" />
+              {errors.status && (
+                <Message severity="error" text={errors.status.message} />
+              )}
             </div>
             <div className="flex flex-wrap align-items-center mb-3 gap-2">
               <label
@@ -85,7 +86,6 @@ export default function Modal({ open, onClose, task }: ModalProps) {
                   required: "Descrição é obrigatória",
                 })}
                 className="mr-2"
-               
               />
             </div>
             <div className="flex flex-wrap align-items-center mb-3 gap-2">
@@ -95,7 +95,6 @@ export default function Modal({ open, onClose, task }: ModalProps) {
                 placeholder="Situação"
                 {...register("status", { required: "Status é obrigatório" })}
                 className="p-invalid mr-2"
-              
               />
               {errors.status && (
                 <Message severity="error" text={errors.status.message} />
