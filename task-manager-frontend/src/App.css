@@ -20,3 +20,7 @@ body {
    background-color: rgb(131 145 215 / 43%);
 }
 
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link .p-submenu-icon {
+    color: white !important;   
+}
+

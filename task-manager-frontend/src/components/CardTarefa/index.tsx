@@ -12,7 +12,7 @@ export default function CardTarefa({ task }: { task: Task }) {
   );
   const footer = (
     <>
-      <div className="card flex justify-between px-1">
+      <div className="card flex justify-between px-1 gap-2">
      
           <Button
             label="Editar"

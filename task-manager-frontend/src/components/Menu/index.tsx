@@ -33,7 +33,7 @@ export default function Menu() {
 
     return (
         <div className="card">
-            <Menubar model={items} style={{background: '#4d4d83'}}  className="custom-menubar" />
+            <Menubar model={items}  className="custom-menubar" />
         </div>
     )
 }
