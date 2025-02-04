@@ -5,27 +5,27 @@ export default function Menu() {
     const items = [
         {
             label: 'Lista de Tarefas',
-            icon: 'pi pi-home'
+            icon: 'pi pi-list-check'
         },
         {
             label: 'Nova Tarefa',
-            icon: 'pi pi-star'
+            icon: 'pi pi-plus'
         },
         {
             label: 'Status',
-            icon: 'pi pi-search',
+            icon: 'pi pi-filter',
             items: [
                 {
                     label: 'Todas',
-                    icon: 'pi pi-bolt'
+                    icon: 'pi pi-table text-white'
                 },
                 {
                     label: 'Pendentes',
-                    icon: 'pi pi-server'
+                    icon: 'pi pi-hourglass'
                 },
                 {
                     label: 'Concluídas',
-                    icon: 'pi pi-pencil'
+                    icon: 'pi pi-check-square'
                 },
             ]
         }
@@ -33,7 +33,7 @@ export default function Menu() {
 
     return (
         <div className="card">
-            <Menubar model={items} />
+            <Menubar model={items} style={{background: '#4d4d83'}}  className="custom-menubar" />
         </div>
     )
 }
