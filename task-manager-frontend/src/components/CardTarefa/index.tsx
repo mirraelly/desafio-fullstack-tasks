@@ -1,9 +1,15 @@
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { Task } from "../../models/task";
-import { ButtonGroup } from "primereact/buttongroup";
 
-export default function CardTarefa({ task }: { task: Task }) {
+interface CardTarefaProps {
+  task: Task;
+  onEdit: (task: Task) => void;
+  onDelete: (taskId: string) => void; 
+}
+
+
+export default function CardTarefa({ task, onEdit, onDelete }: CardTarefaProps)  {
   const header = (
     <img
       alt="Card"
@@ -20,7 +26,7 @@ export default function CardTarefa({ task }: { task: Task }) {
             severity="info"
             size="small"
             outlined
-            // onClick={load}
+            onClick={() => onEdit(task)}
           />
           <Button
             label="Apagar"
@@ -28,6 +34,7 @@ export default function CardTarefa({ task }: { task: Task }) {
             icon="pi pi-trash"
             size="small"
             outlined
+            onClick={() => onDelete(task.id)}
           />
       </div>
     </>
