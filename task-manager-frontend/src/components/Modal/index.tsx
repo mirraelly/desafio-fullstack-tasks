@@ -3,6 +3,8 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Message } from "primereact/message";
 import { Task } from "../../models/task";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 
 interface ModalProps {
   open: boolean;
@@ -11,6 +13,23 @@ interface ModalProps {
 }
 
 export default function Modal({ open, onClose, task }: ModalProps) {
+  const {
+    register, 
+    handleSubmit, 
+    formState: { errors }, 
+    reset,
+  } = useForm<Task>();
+
+  useEffect(() => {
+    if (task) {
+      reset(task);
+    }
+  }, [task, reset]);
+
+  const onSubmit = (data: FormData) => {
+    console.log("Dados do formulário enviados:", data);
+  };
+
   const footerContent = (
     <div>
       <Button
@@ -24,6 +43,7 @@ export default function Modal({ open, onClose, task }: ModalProps) {
         icon="pi pi-check"
         onClick={() => onClose()}
         autoFocus
+         type="submit"
       />
     </div>
   );
@@ -41,34 +61,47 @@ export default function Modal({ open, onClose, task }: ModalProps) {
         footer={footerContent}
       >
         <p className="m-0">
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
-            <label htmlFor="title" className="p-hidden-accessible"></label>
-            <InputText
-              id="title"
-              placeholder="Título"
-              className="p-invalid mr-2"
-              value={task.title}
-            />
-            <Message severity="error" text="Username is required" />
-          </div>
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
-            <label htmlFor="descricao" className="p-hidden-accessible"></label>
-            <InputText
-              id="descricacao"
-              placeholder="Descrição"
-              className="mr-2"
-              value={task.description}
-            />
-          </div>
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
-            <label htmlFor="status" className="p-hidden-accessible"></label>
-            <InputText
-              id="status"
-              placeholder="Situação"
-              className="p-invalid mr-2"
-              value={task.status}
-            />
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex flex-wrap align-items-center mb-3 gap-2">
+              <label htmlFor="title" className="p-hidden-accessible"></label>
+              <InputText
+                id="title"
+                {...register("title", { required: "Título é obrigatório" })}
+                placeholder="Título"
+                className="p-invalid mr-2"
+             
+              />
+              <Message severity="error" text="Username is required" />
+            </div>
+            <div className="flex flex-wrap align-items-center mb-3 gap-2">
+              <label
+                htmlFor="descricao"
+                className="p-hidden-accessible"
+              ></label>
+              <InputText
+                id="descricacao"
+                placeholder="Descrição"
+                {...register("description", {
+                  required: "Descrição é obrigatória",
+                })}
+                className="mr-2"
+               
+              />
+            </div>
+            <div className="flex flex-wrap align-items-center mb-3 gap-2">
+              <label htmlFor="status" className="p-hidden-accessible"></label>
+              <InputText
+                id="status"
+                placeholder="Situação"
+                {...register("status", { required: "Status é obrigatório" })}
+                className="p-invalid mr-2"
+              
+              />
+              {errors.status && (
+                <Message severity="error" text={errors.status.message} />
+              )}
+            </div>
+          </form>
         </p>
       </Dialog>
     </div>
