@@ -4,6 +4,23 @@ import Painel from "../../components/Painel";
 import Modal from "../../components/Modal";
 import { Task } from "../../models/task";
 
+const todasTasks: Task[] = [
+  {
+    id: "2",
+    title: "Tarefa1",
+    description: "Teste",
+    createdAt: "02/02/2025",
+    status: "pending",
+  },
+  {
+    id: "3",
+    title: "Tarefa2",
+    description: "Teste",
+    createdAt: "03/02/2025",
+    status: "completed",
+  },
+];
+
 function Home() {
   const [activePage, setActivePage] = useState("list");
   const [task, setTask] = useState<Task | null>(null);
@@ -22,29 +39,15 @@ function Home() {
     setModalOpen(true);
   };
 
-  const todasTasks: Task[] = [
-    {
-      id: "2",
-      title: "Tarefa1",
-      description: "Teste",
-      createdAt: "02/02/2025",
-      status: "pending",
-    },
-    {
-      id: "3",
-      title: "Tarefa2",
-      description: "Teste",
-      createdAt: "03/02/2025",
-      status: "completed",
-    },
-  ];
-  
-
   const [tasksExibidas, setTasksExibidas] = useState<Task[]>(todasTasks);
 
   const handleDeleteTask = (taskId?: string) => {
     if (taskId) {
-      setTasksExibidas((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+      const index = todasTasks.findIndex((task) => task.id == taskId);
+      todasTasks.splice(index, 1);
+      setTasksExibidas((prevTasks) =>
+        prevTasks.filter((task) => task.id !== taskId)
+      );
     }
   };
 
@@ -60,14 +63,13 @@ function Home() {
           return task.status === "pending";
         })
       );
-    } else if (page === 'completed') {
+    } else if (page === "completed") {
       setTasksExibidas(
         todasTasks.filter((task) => {
           return task.status === "completed";
         })
       );
-    }
-    else {
+    } else {
       setTasksExibidas(todasTasks);
     }
   };
@@ -83,14 +85,13 @@ function Home() {
         />
       )}
       {task && <Modal open={modalOpen} onClose={closeModal} task={task} />}
-   
-        <Painel
-          activePage={activePage}
-          setTask={handleSetTask}
-          tasks={tasksExibidas}
-          onDelete={handleDeleteTask}
-        />
- 
+
+      <Painel
+        activePage={activePage}
+        setTask={handleSetTask}
+        tasks={tasksExibidas}
+        onDelete={handleDeleteTask}
+      />
     </>
   );
 }

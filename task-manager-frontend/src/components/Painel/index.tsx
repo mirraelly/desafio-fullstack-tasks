@@ -62,6 +62,7 @@ export default function Painel({ activePage, tasks, setTask, onDelete }: PainelP
         itemTemplate={itemTemplate}
         listTemplate={listTemplate}
         layout={"grid"}
+        
       />
     </div>
   );
