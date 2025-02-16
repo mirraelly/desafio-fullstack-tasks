@@ -6,16 +6,18 @@ interface PainelProps {
   activePage: string;
   tasks: Task[];
   setTask: (t: Task) => void;
+  onDelete: (taskId?: string) => void; 
 }
 
-export default function Painel({ activePage, tasks, setTask }: PainelProps) {
-console.log(tasks)
+export default function Painel({ activePage, tasks, setTask, onDelete }: PainelProps) { 
+  console.log(tasks);
+
   const gridItem = (task: Task) => (
     <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={task.id}>
       <CardTarefa
         task={task}
         onEdit={() => setTask(task)}
-        onDelete={handleDeleteTask}
+        onDelete={onDelete} 
       />
     </div>
   );
@@ -32,15 +34,9 @@ console.log(tasks)
     );
   };
 
-  const handleDeleteTask = (taskId?: string) => {
-    console.log("Deletando tarefa com ID", taskId);
-    // Lógica para excluir a tarefa
-  };
-
   return (
     <div>
       {/* Renderização das tarefas */}
-
       {activePage === "new" && (
         <div>
           <h2 className="text-blue-900 text-[1.3rem] ms-4 mt-2 font-bold underline underline-offset-2 decoration-2 text-center">Nova Tarefa</h2>
@@ -61,12 +57,12 @@ console.log(tasks)
           <h2 className="text-blue-900 text-[1.3rem] ms-4 mt-2 font-bold underline underline-offset-2 decoration-2 text-center">Tarefas Concluídas</h2>
         </div>
       )}
-        <DataView
-          value={tasks}
-          itemTemplate={itemTemplate}
-          listTemplate={listTemplate}
-          layout={"grid"}
-        />
+      <DataView
+        value={tasks}
+        itemTemplate={itemTemplate}
+        listTemplate={listTemplate}
+        layout={"grid"}
+      />
     </div>
   );
 }

@@ -72,7 +72,7 @@ export default function Modal({ open, onClose, task }: ModalProps) {
   return (
     <div className="card flex justify-content-center">
       <Dialog
-        header="Header"
+        header="Tarefa"
         visible={open}
         style={{ width: "50vw" }}
         onHide={() => {

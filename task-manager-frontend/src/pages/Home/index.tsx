@@ -9,7 +9,6 @@ function Home() {
   const [task, setTask] = useState<Task | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  // Função para fechar o modal de nova tarefa
   const closeModal = (taskSalva?: Task) => {
     if (taskSalva !== null && task !== null) {
       Object.assign(task, taskSalva);
@@ -39,8 +38,15 @@ function Home() {
       status: "completed",
     },
   ];
+  
 
   const [tasksExibidas, setTasksExibidas] = useState<Task[]>(todasTasks);
+
+  const handleDeleteTask = (taskId?: string) => {
+    if (taskId) {
+      setTasksExibidas((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+    }
+  };
 
   const handleSetActivePage = (page: string) => {
     setActivePage(page);
@@ -82,6 +88,7 @@ function Home() {
           activePage={activePage}
           setTask={handleSetTask}
           tasks={tasksExibidas}
+          onDelete={handleDeleteTask}
         />
  
     </>
