@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 interface ModalProps {
   open: boolean;
-  onClose: () => void;
+  onClose: (task?: Task) => void;
   task: Task | null;
 }
 
@@ -17,6 +17,7 @@ export default function Modal({ open, onClose, task }: ModalProps) {
   const {
     register,
     control,
+    getValues,
     handleSubmit,
     formState: { errors },
     reset,
@@ -61,7 +62,7 @@ export default function Modal({ open, onClose, task }: ModalProps) {
       <Button
         label="Salvar"
         icon="pi pi-check"
-        onClick={() => onClose()}
+        onClick={() => onClose(getValues())}
         autoFocus
         type="submit"
       />

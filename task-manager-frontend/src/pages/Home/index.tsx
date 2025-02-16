@@ -10,7 +10,10 @@ function Home() {
   const [modalOpen, setModalOpen] = useState(false);
 
   // Função para fechar o modal de nova tarefa
-  const closeModal = () => {
+  const closeModal = (taskSalva?: Task) => {
+    if (taskSalva !== null && task !== null) {
+      Object.assign(task, taskSalva);
+    }
     setTask(null);
     setModalOpen(false);
   };
