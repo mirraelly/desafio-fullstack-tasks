@@ -42,7 +42,7 @@ export default function Modal({ open, onClose, task }: ModalProps) {
 
   useEffect(() => {
     if (task) {
-      reset(task);
+      reset({ ...task });
     }
   }, [task, reset]);
 
