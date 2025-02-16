@@ -4,7 +4,7 @@ import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { Message } from "primereact/message";
 import { Task } from "../../models/task";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useEffect } from "react";
 
 interface ModalProps {
@@ -16,6 +16,7 @@ interface ModalProps {
 export default function Modal({ open, onClose, task }: ModalProps) {
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     reset,
@@ -109,13 +110,21 @@ export default function Modal({ open, onClose, task }: ModalProps) {
             </div>
             <div className="flex flex-wrap align-items-center mb-3 gap-2">
               <label htmlFor="status" className="p-hidden-accessible"></label>
-              <Dropdown
-                options={listaStatus}
-                id="status"
-                placeholder="Selecionar status"
-                {...register("status", { required: "Status é obrigatório" })}
-                className="p-invalid w-full"
-                itemTemplate={countryOptionTemplate}
+              <Controller
+                name="status"
+                control={control}
+                render={({ field }) => (
+                  <Dropdown
+                    id={field.name}
+                    value={field.value}
+                    onChange={(e) => field.onChange(e.value)}
+                    options={listaStatus}
+                    placeholder="Selecionar status"
+                    className="p-invalid w-full"
+                    itemTemplate={countryOptionTemplate}
+                    valueTemplate={countryOptionTemplate}
+                  />
+                )}
               />
               {errors.status && (
                 <Message severity="error" text={errors.status.message} />
