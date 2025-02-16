@@ -5,7 +5,7 @@ import { Task } from "../../models/task";
 interface CardTarefaProps {
   task: Task;
   onEdit: (task: Task) => void;
-  onDelete: (taskId: string) => void; 
+  onDelete: (taskId?: string) => void; 
 }
 
 

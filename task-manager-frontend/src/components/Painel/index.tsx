@@ -55,12 +55,7 @@ export default function Painel({ activePage, setTask }: PainelProps) {
     );
   };
 
-  const handleEditTask = (task: Task) => {
-    console.log("Editando tarefa", task);
-    setTask(task);
-  };
-
-  const handleDeleteTask = (taskId: string) => {
+  const handleDeleteTask = (taskId?: string) => {
     console.log("Deletando tarefa com ID", taskId);
     // Lógica para excluir a tarefa
   };

@@ -9,11 +9,6 @@ function Home() {
   const [task, setTask] = useState<Task | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  // Função para abrir o modal de nova tarefa
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
   // Função para fechar o modal de nova tarefa
   const closeModal = () => {
     setModalOpen(false);

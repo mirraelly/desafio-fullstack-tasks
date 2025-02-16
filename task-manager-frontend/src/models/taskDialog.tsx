@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import { Textarea } from "primereact/textarea";
+import { InputTextarea } from "primereact/inputtextarea";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
 import { Task } from "./task";
@@ -31,10 +31,10 @@ export default function TaskDialog({ visible, onHide, onSave, task }: TaskDialog
     <Dialog header={task ? "Editar Tarefa" : "Nova Tarefa"} visible={visible} onHide={onHide} style={{ width: "30rem" }}>
       <div className="flex flex-col gap-3">
         <label>Título</label>
-        <InputText value={taskData.title} onChange={(e) => handleChange("title", e.target.value)} />
+        <InputText value={taskData.title} onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange("title", e.target.value)} />
 
         <label>Descrição</label>
-        <Textarea value={taskData.description} onChange={(e) => handleChange("description", e.target.value)} />
+        <InputTextarea value={taskData.description} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleChange("description", e.target.value)} />
 
         <label>Status</label>
         <Dropdown
