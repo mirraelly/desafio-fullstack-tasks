@@ -23,10 +23,46 @@ function Home() {
     setModalOpen(true);
   };
 
+  const todasTasks: Task[] = [
+    {
+      id: "2",
+      title: "Tarefa1",
+      description: "Teste",
+      createdAt: "02/02/2025",
+      status: "pending",
+    },
+    {
+      id: "3",
+      title: "Tarefa2",
+      description: "Teste",
+      createdAt: "03/02/2025",
+      status: "completed",
+    },
+  ];
+
+  const [tasksExibidas, setTasksExibidas] = useState<Task[]>(todasTasks);
+
   const handleSetActivePage = (page: string) => {
     setActivePage(page);
     if (page === "new") {
       setModalOpen(true);
+    } else if (page === "all") {
+      setTasksExibidas(todasTasks);
+    } else if (page === "pending") {
+      setTasksExibidas(
+        todasTasks.filter((task) => {
+          return task.status === "pending";
+        })
+      );
+    } else if (page === 'completed') {
+      setTasksExibidas(
+        todasTasks.filter((task) => {
+          return task.status === "completed";
+        })
+      );
+    }
+    else {
+      setTasksExibidas(todasTasks);
     }
   };
 
@@ -41,9 +77,13 @@ function Home() {
         />
       )}
       {task && <Modal open={modalOpen} onClose={closeModal} task={task} />}
-      {activePage === "list" && (
-        <Painel activePage={activePage} setTask={handleSetTask} />
-      )}
+   
+        <Painel
+          activePage={activePage}
+          setTask={handleSetTask}
+          tasks={tasksExibidas}
+        />
+ 
     </>
   );
 }

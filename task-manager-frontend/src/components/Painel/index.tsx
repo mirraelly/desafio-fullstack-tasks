@@ -1,38 +1,15 @@
-import { useState } from "react";
 import { DataView } from "primereact/dataview";
 import { Task } from "../../models/task";
 import CardTarefa from "../CardTarefa";
 
 interface PainelProps {
   activePage: string;
+  tasks: Task[];
   setTask: (t: Task) => void;
 }
 
-export default function Painel({ activePage, setTask }: PainelProps) {
-  const [tasks] = useState<Task[]>([
-    {
-      id: "2",
-      title: "Tarefa1",
-      description: "Teste",
-      createdAt: "02/02/2025",
-      status: "pending",
-    },
-    {
-      id: "3",
-      title: "Tarefa2",
-      description: "Teste",
-      createdAt: "03/02/2025",
-      status: "completed",
-    },
-  ]);
-
-  const filteredTasks = tasks.filter((task) => {
-    if (activePage === "all") return true;
-    if (activePage === "pending") return task.status === "pending";
-    if (activePage === "completed") return task.status === "completed";
-    return true;
-  });
-
+export default function Painel({ activePage, tasks, setTask }: PainelProps) {
+console.log(tasks)
   const gridItem = (task: Task) => (
     <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={task.id}>
       <CardTarefa
@@ -62,39 +39,34 @@ export default function Painel({ activePage, setTask }: PainelProps) {
 
   return (
     <div>
-      {/* Renderização condicional baseado no valor de activePage */}
-      {activePage === "list" && (
-        <DataView
-          value={filteredTasks}
-          itemTemplate={itemTemplate}
-          listTemplate={listTemplate}
-          layout={"grid"}
-        />
-      )}
+      {/* Renderização das tarefas */}
+
       {activePage === "new" && (
         <div>
-          {/* Aqui você pode adicionar o formulário para nova tarefa */}
-          <h2>Nova Tarefa</h2>
+          <h2 className="text-blue-900 text-[1.3rem] ms-4 mt-2 font-bold underline underline-offset-2 decoration-2 text-center">Nova Tarefa</h2>
         </div>
       )}
       {activePage === "all" && (
         <div>
-          {/* Aqui você pode adicionar o conteúdo para "Todas as tarefas" */}
-          <h2>Todas as Tarefas</h2>
+          <h2 className="text-blue-900 text-[1.3rem] ms-4 mt-2 font-bold underline underline-offset-2 decoration-2 text-center">Todas as Tarefas</h2>
         </div>
       )}
       {activePage === "pending" && (
         <div>
-          {/* Aqui você pode adicionar o conteúdo para "Tarefas Pendentes" */}
-          <h2>Tarefas Pendentes</h2>
+          <h2 className="text-blue-900 text-[1.3rem] ms-4 mt-2 font-bold underline underline-offset-2 decoration-2 text-center">Tarefas Pendentes</h2>
         </div>
       )}
       {activePage === "completed" && (
         <div>
-          {/* Aqui você pode adicionar o conteúdo para "Tarefas Concluídas" */}
-          <h2>Tarefas Concluídas</h2>
+          <h2 className="text-blue-900 text-[1.3rem] ms-4 mt-2 font-bold underline underline-offset-2 decoration-2 text-center">Tarefas Concluídas</h2>
         </div>
       )}
+        <DataView
+          value={tasks}
+          itemTemplate={itemTemplate}
+          listTemplate={listTemplate}
+          layout={"grid"}
+        />
     </div>
   );
 }
