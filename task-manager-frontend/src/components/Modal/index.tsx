@@ -1,5 +1,6 @@
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
+import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { Message } from "primereact/message";
 import { Task } from "../../models/task";
@@ -19,6 +20,24 @@ export default function Modal({ open, onClose, task }: ModalProps) {
     formState: { errors },
     reset,
   } = useForm<Task>();
+
+  const listaStatus = ["pending", "completed"];
+
+  const countryOptionTemplate = (option: string) => {
+    return (
+      <div className="flex align-items-center">
+        <div>{traduzirStatus(option)}</div>
+      </div>
+    );
+  };
+
+  function traduzirStatus(status: string) {
+    if (status === "pending") {
+      return "Pendente";
+    } else {
+      return "Concluído";
+    }
+  }
 
   useEffect(() => {
     if (task) {
@@ -68,7 +87,7 @@ export default function Modal({ open, onClose, task }: ModalProps) {
                 id="title"
                 {...register("title", { required: "Título é obrigatório" })}
                 placeholder="Título"
-                className="p-invalid mr-2"
+                className="p-invalid mr-2 w-full"
               />
               {errors.status && (
                 <Message severity="error" text={errors.status.message} />
@@ -85,16 +104,18 @@ export default function Modal({ open, onClose, task }: ModalProps) {
                 {...register("description", {
                   required: "Descrição é obrigatória",
                 })}
-                className="mr-2"
+                className="mr-2 w-full"
               />
             </div>
             <div className="flex flex-wrap align-items-center mb-3 gap-2">
               <label htmlFor="status" className="p-hidden-accessible"></label>
-              <InputText
+              <Dropdown
+                options={listaStatus}
                 id="status"
-                placeholder="Situação"
+                placeholder="Selecionar status"
                 {...register("status", { required: "Status é obrigatório" })}
-                className="p-invalid mr-2"
+                className="p-invalid w-full"
+                itemTemplate={countryOptionTemplate}
               />
               {errors.status && (
                 <Message severity="error" text={errors.status.message} />
